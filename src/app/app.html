@@ -1,30 +1,35 @@
-<nav class="navbar navbar-dark bg-dark mb-4">
-  <div class="container">
-    <span class="navbar-brand fw-bold">Cart Manager</span>
-    <div class="d-flex gap-2">
+<header class="app-header border-bottom mb-5">
+  <div class="container d-flex justify-content-between align-items-center py-3">
+    <div>
+      <h1 class="h5 fw-bold mb-0">Cart Manager</h1>
+      <small class="text-muted">Product management</small>
+    </div>
+    <nav class="d-flex gap-1">
       <button
-        class="btn btn-sm"
-        [class.btn-light]="activeTab() === 'products'"
-        [class.btn-outline-light]="activeTab() !== 'products'"
+        class="btn btn-sm px-4"
+        [class.btn-dark]="activeTab() === 'products'"
+        [class.btn-outline-secondary]="activeTab() !== 'products'"
         (click)="activeTab.set('products')">
         Products
       </button>
       <button
-        class="btn btn-sm"
-        [class.btn-light]="activeTab() === 'cart'"
-        [class.btn-outline-light]="activeTab() !== 'cart'"
+        class="btn btn-sm px-4"
+        [class.btn-dark]="activeTab() === 'cart'"
+        [class.btn-outline-secondary]="activeTab() !== 'cart'"
         (click)="activeTab.set('cart')">
         Cart
       </button>
-    </div>
+    </nav>
   </div>
-</nav>
+</header>
 
-<div class="container pb-5">
+<main class="container pb-5">
   @if (activeTab() === 'products') {
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="mb-0">Products</h2>
-      <button class="btn btn-success" (click)="onAddNew()">+ Add Product</button>
+      <h2 class="h4 fw-bold mb-0">Products</h2>
+      @if (!showForm()) {
+        <button class="btn btn-dark btn-sm px-4" (click)="onAddNew()">+ New product</button>
+      }
     </div>
 
     @if (showForm()) {
@@ -38,7 +43,7 @@
   }
 
   @if (activeTab() === 'cart') {
-    <h2 class="mb-4">Shopping Cart</h2>
+    <h2 class="h4 fw-bold mb-4">Shopping Cart</h2>
     <app-cart></app-cart>
   }
-</div>
+</main>

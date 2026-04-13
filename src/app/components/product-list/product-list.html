@@ -1,31 +1,40 @@
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
   @for (product of products(); track product.id) {
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <span class="badge bg-secondary mb-2">{{ product.category }}</span>
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text text-muted small">{{ product.description }}</p>
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <span class="fs-5 fw-bold text-success">${{ product.price | number:'1.2-2' }}</span>
-            <span class="text-muted small">Stock: {{ product.stock }}</span>
+      <div class="card h-100 border-0 shadow-sm product-card">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <span class="badge badge-category">{{ product.category }}</span>
+            <span class="text-muted small">
+              {{ product.stock > 0 ? product.stock + ' left' : 'Out of stock' }}
+            </span>
           </div>
+          <h5 class="card-title fw-semibold mb-1">{{ product.name }}</h5>
+          <p class="card-text text-muted small mb-3">{{ product.description }}</p>
+          <p class="price-tag mb-0">${{ product.price | number:'1.2-2' }}</p>
         </div>
-        <div class="card-footer bg-transparent d-flex gap-2">
+        <div class="card-footer border-0 bg-transparent px-4 pb-4 d-flex gap-2">
           <button
-            class="btn btn-primary btn-sm flex-grow-1"
+            class="btn btn-dark btn-sm flex-grow-1"
             (click)="addToCart(product)"
             [disabled]="product.stock === 0">
-            {{ product.stock === 0 ? 'Out of stock' : 'Add to cart' }}
+            Add to cart
           </button>
-          <button class="btn btn-outline-secondary btn-sm" (click)="onEdit(product)">Edit</button>
-          <button class="btn btn-outline-danger btn-sm" (click)="onDelete(product.id)">Delete</button>
+          <button class="btn btn-outline-secondary btn-sm px-3" (click)="onEdit(product)" title="Edit">
+            ✏️
+          </button>
+          <button class="btn btn-outline-danger btn-sm px-3" (click)="onDelete(product)" title="Delete">
+            🗑️
+          </button>
         </div>
       </div>
     </div>
   } @empty {
     <div class="col-12">
-      <div class="alert alert-info text-center">No products available. Add one!</div>
+      <div class="empty-state text-center py-5">
+        <div class="fs-1 mb-2">📦</div>
+        <p class="text-muted">No products yet. Add your first one!</p>
+      </div>
     </div>
   }
 </div>

@@ -2,6 +2,7 @@ import { Component, inject, input, OnChanges, output, SimpleChanges } from '@ang
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product';
+import { AlertService } from '../../services/alert';
 import { Product } from '../../models/product';
 
 @Component({
@@ -12,6 +13,7 @@ import { Product } from '../../models/product';
 })
 export class ProductForm implements OnChanges {
   private productService = inject(ProductService);
+  private alertService = inject(AlertService);
 
   productToEdit = input<Product | null>(null);
   formClosed = output<void>();
@@ -29,8 +31,10 @@ export class ProductForm implements OnChanges {
     const p = this.productToEdit();
     if (p) {
       this.productService.updateProduct({ ...this.formData, id: p.id });
+      this.alertService.success(`"${this.formData.name}" updated successfully`);
     } else {
       this.productService.addProduct(this.formData);
+      this.alertService.success(`"${this.formData.name}" added successfully`);
     }
     this.reset();
   }

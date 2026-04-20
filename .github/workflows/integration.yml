@@ -1,0 +1,28 @@
+# Prompt: run unit tests on every push/merge to integration branch
+# Step 1: checkout, setup Node 22.x, install deps
+# Step 2: run unit tests with coverage report
+
+name: Integration CI
+
+on:
+  push:
+    branches: [integration]
+
+jobs:
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npx ng test --watch=false --coverage --coverage-reporters=text-summary

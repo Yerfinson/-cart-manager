@@ -1,0 +1,44 @@
+# Prompt: full production pipeline on merge to main
+# Step 1: checkout, setup Node 22.x, install deps
+# Step 2: run tests
+# Step 3: run production build
+# Step 4: validate semantic version tag exists
+
+name: Production Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release:
+    name: Test, Build & Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npx ng test --watch=false --coverage --coverage-reporters=text-summary
+
+      - name: Build application
+        run: npx ng build --configuration production
+
+      - name: Validate semantic version tag
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "none")
+          echo "Latest tag: $LATEST_TAG"
+          if [[ ! "$LATEST_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "No valid semantic version tag found. Tag the release before merging to main."
+            exit 1
+          fi

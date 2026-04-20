@@ -1,0 +1,33 @@
+# Prompt: validate PR requirements before merge to integration
+# Step 1: checkout code
+# Step 2: setup Node 22.x
+# Step 3: install dependencies
+# Step 4: run ESLint
+
+name: Requirements Check
+
+on:
+  pull_request:
+    branches: [integration]
+
+jobs:
+  lint:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npx eslint src/
+
+      - name: Check Prettier formatting
+        run: npx prettier --check "src/**/*.{ts,html,scss}"

@@ -1,0 +1,17 @@
+# Context: ITAC CoE git hooks via lefthook
+# commit-msg: validates Smart Commits format
+# pre-commit: runs ESLint + Prettier check
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx --no-install commitlint --config commitlint.config.cjs --edit {1}
+
+pre-commit:
+  commands:
+    eslint:
+      glob: '*.ts'
+      run: npx eslint {staged_files}
+    prettier:
+      glob: '*.{ts,html,scss,json}'
+      run: npx prettier --check {staged_files}

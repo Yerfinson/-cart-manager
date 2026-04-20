@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../../services/product';
-import { AlertService } from '../../services/alert';
+import { ProductService } from '../../../services/product';
+import { AlertService } from '../../../services/alert';
 
 @Component({
   selector: 'app-cart',

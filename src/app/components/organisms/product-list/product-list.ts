@@ -1,8 +1,8 @@
 import { Component, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../../services/product';
-import { AlertService } from '../../services/alert';
-import { Product } from '../../models/product';
+import { ProductService } from '../../../services/product';
+import { AlertService } from '../../../services/alert';
+import { Product } from '../../../models/product';
 
 @Component({
   selector: 'app-product-list',

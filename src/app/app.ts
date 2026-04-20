@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductList } from './components/product-list/product-list';
-import { ProductForm } from './components/product-form/product-form';
-import { Cart } from './components/cart/cart';
+import { ProductList } from './components/organisms/product-list/product-list';
+import { ProductForm } from './components/molecules/product-form/product-form';
+import { Cart } from './components/organisms/cart/cart';
 import { Product } from './models/product';
 
 @Component({

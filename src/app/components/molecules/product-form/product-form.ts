@@ -1,9 +1,9 @@
 import { Component, inject, input, OnChanges, output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ProductService } from '../../services/product';
-import { AlertService } from '../../services/alert';
-import { Product } from '../../models/product';
+import { ProductService } from '../../../services/product';
+import { AlertService } from '../../../services/alert';
+import { Product } from '../../../models/product';
 
 @Component({
   selector: 'app-product-form',

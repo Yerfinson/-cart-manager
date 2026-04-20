@@ -8,9 +8,30 @@ export class ProductService {
   private nextId = signal(4);
 
   private products = signal<Product[]>([
-    { id: 1, name: 'Laptop Pro', description: 'High performance laptop', price: 1299.99, stock: 10, category: 'Electronics' },
-    { id: 2, name: 'Wireless Mouse', description: 'Ergonomic wireless mouse', price: 29.99, stock: 50, category: 'Accessories' },
-    { id: 3, name: 'Mechanical Keyboard', description: 'RGB mechanical keyboard', price: 89.99, stock: 30, category: 'Accessories' },
+    {
+      id: 1,
+      name: 'Laptop Pro',
+      description: 'High performance laptop',
+      price: 1299.99,
+      stock: 10,
+      category: 'Electronics',
+    },
+    {
+      id: 2,
+      name: 'Wireless Mouse',
+      description: 'Ergonomic wireless mouse',
+      price: 29.99,
+      stock: 50,
+      category: 'Accessories',
+    },
+    {
+      id: 3,
+      name: 'Mechanical Keyboard',
+      description: 'RGB mechanical keyboard',
+      price: 89.99,
+      stock: 30,
+      category: 'Accessories',
+    },
   ]);
 
   private cart = signal<CartItem[]>([]);
@@ -30,13 +51,9 @@ export class ProductService {
   }
 
   updateProduct(updated: Product): void {
-    this.products.update(list =>
-      list.map(p => (p.id === updated.id ? updated : p))
-    );
+    this.products.update(list => list.map(p => (p.id === updated.id ? updated : p)));
     this.cart.update(items =>
-      items.map(item =>
-        item.product.id === updated.id ? { ...item, product: updated } : item
-      )
+      items.map(item => (item.product.id === updated.id ? { ...item, product: updated } : item))
     );
   }
 
@@ -50,9 +67,7 @@ export class ProductService {
     if (existing) {
       this.cart.update(items =>
         items.map(item =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+          item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         )
       );
     } else {
@@ -70,9 +85,7 @@ export class ProductService {
       return;
     }
     this.cart.update(items =>
-      items.map(item =>
-        item.product.id === productId ? { ...item, quantity } : item
-      )
+      items.map(item => (item.product.id === productId ? { ...item, quantity } : item))
     );
   }
 

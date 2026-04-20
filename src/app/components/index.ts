@@ -1,3 +1,5 @@
-export * from './cart/cart';
-export * from './product-form/product-form';
-export * from './product-list/product-list';
+// Molecules
+export * from './molecules/product-form/product-form';
+// Organisms
+export * from './organisms/cart/cart';
+export * from './organisms/product-list/product-list';

@@ -13,9 +13,10 @@
             [(ngModel)]="formData.name"
             name="name"
             required
-            #nameField="ngModel">
+            #nameField="ngModel"
+          />
           @if (nameField.invalid && nameField.touched) {
-            <div class="text-danger small mt-1">Name is required.</div>
+          <div class="text-danger small mt-1">Name is required.</div>
           }
         </div>
         <div class="col-md-6">
@@ -26,9 +27,10 @@
             [(ngModel)]="formData.category"
             name="category"
             required
-            #categoryField="ngModel">
+            #categoryField="ngModel"
+          />
           @if (categoryField.invalid && categoryField.touched) {
-            <div class="text-danger small mt-1">Category is required.</div>
+          <div class="text-danger small mt-1">Category is required.</div>
           }
         </div>
         <div class="col-12">
@@ -37,7 +39,8 @@
             class="form-control"
             [(ngModel)]="formData.description"
             name="description"
-            rows="2">
+            rows="2"
+          >
           </textarea>
         </div>
         <div class="col-md-6">
@@ -52,10 +55,11 @@
               min="0.01"
               step="0.01"
               required
-              #priceField="ngModel">
+              #priceField="ngModel"
+            />
           </div>
           @if (priceField.invalid && priceField.touched) {
-            <div class="text-danger small mt-1">Price must be greater than 0.</div>
+          <div class="text-danger small mt-1">Price must be greater than 0.</div>
           }
         </div>
         <div class="col-md-6">
@@ -67,9 +71,10 @@
             name="stock"
             min="0"
             required
-            #stockField="ngModel">
+            #stockField="ngModel"
+          />
           @if (stockField.invalid && stockField.touched) {
-            <div class="text-danger small mt-1">Stock cannot be negative.</div>
+          <div class="text-danger small mt-1">Stock cannot be negative.</div>
           }
         </div>
       </div>
